@@ -3,14 +3,15 @@
   "description": "微信读书 Web 端小助手",
   "version": "1.0",
   "manifest_version": 3,
-  "background": {
-    "service_worker": "background.js"
-  },
+
   "permissions": [
     "storage", 
     "activeTab", 
     "scripting",
     "tabs"
+  ],
+  "host_permissions": [
+    "https://weread.qq.com/"
   ],
   "action": {
     "default_popup": "popup.html",
@@ -22,7 +23,11 @@
     "48": "/images/weread.png",
     "128": "/images/weread.png"
   },
-  "host_permissions": [
-    "https://weread.qq.com/"
+  "content_scripts": [
+    {
+      "matches": ["https://weread.qq.com/web/reader/*"],
+      "run_at": "document_end",
+      "js": ["content-script.js"]
+    }
   ]
 }
