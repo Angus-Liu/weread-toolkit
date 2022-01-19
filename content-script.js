@@ -1,5 +1,5 @@
 /**
- * @param {String} HTML representing a single element
+ * @param {String} HTML 用于转换为 element 的 html 字符串
  * @return {Element}
  */
 function htmlToElement (html) {
@@ -73,5 +73,5 @@ function appendFullScreenItem () {
     }
 }
 
-// 延迟 3s 执行，避免其他 js 执行覆盖掉修改
+// 延迟 2s 执行，避免其他 js 后执行覆盖掉修改
 setTimeout(appendFullScreenItem, 2000);

@@ -3,12 +3,8 @@
   "description": "微信读书 Web 端小助手",
   "version": "1.0",
   "manifest_version": 3,
-
   "permissions": [
-    "storage", 
-    "activeTab", 
-    "scripting",
-    "tabs"
+    "scripting"
   ],
   "host_permissions": [
     "https://weread.qq.com/"
