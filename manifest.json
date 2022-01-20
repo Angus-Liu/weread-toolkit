@@ -1,6 +1,6 @@
 {
   "name": "微信读书助手",
-  "description": "微信读书 Web 端小助手",
+  "description": "微信读书 Web 端工具箱",
   "version": "1.0",
   "manifest_version": 3,
   "permissions": [
