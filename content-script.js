@@ -73,6 +73,8 @@ function appendFullScreenItem () {
         if (retryTimes-- > 0) {
             // 进行失败重试
             setTimeout(appendFullScreenItem, 2000);
+        } else {
+            console.log(e);
         }
     }
 }
