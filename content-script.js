@@ -42,6 +42,8 @@ function runFullScreen () {
     window.dispatchEvent(resizeEvent);
 }
 
+let retryTimes = 3;
+
 // 将按钮添加到控制栏
 function appendFullScreenItem () {
     try {
@@ -68,8 +70,10 @@ function appendFullScreenItem () {
         let readerControls = document.querySelector('div.readerControls');
         readerControls.prepend(fullScreenItem);
     } catch (e) {
-        // 进行失败重试
-        setTimeout(appendFullScreenItem, 2000);
+        if (retryTimes-- > 0) {
+            // 进行失败重试
+            setTimeout(appendFullScreenItem, 2000);
+        }
     }
 }
 
