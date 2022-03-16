@@ -2,7 +2,7 @@
  * @param {String} HTML 用于转换为 element 的 html 字符串
  * @return {Element}
  */
-function htmlToElement (html) {
+ function htmlToElement (html) {
     var template = document.createElement('template');
     template.innerHTML = html.trim();
     return template.content.firstChild;
@@ -49,18 +49,22 @@ function appendFullScreenItem () {
     try {
         let themeStyle = document.querySelector('button.readerControls_item.theme > span');
         let fullScreenItemSpan = htmlToElement('<span>全屏</span>');
-        fullScreenItemSpan.style.color = themeStyle.style.color;
-
-        // 监听主题按钮颜色变化，为全屏按钮设置样式
-        new MutationObserver((mutations) => {
-            mutations.forEach((mutation) => {
-                if (mutation.type == "attributes") {
-                    if (mutation.target.dataset.color !== mutation.target.style.color) {
-                        fullScreenItemSpan.style.color = mutation.target.style.color;
+    
+        try {        
+            fullScreenItemSpan.style.color = themeStyle.style.color;
+            // 监听主题按钮颜色变化，为全屏按钮设置样式
+            new MutationObserver((mutations) => {
+                mutations.forEach((mutation) => {
+                    if (mutation.type == "attributes") {
+                        if (mutation.target.dataset.color !== mutation.target.style.color) {
+                            fullScreenItemSpan.style.color = mutation.target.style.color;
+                        }
                     }
-                }
-            });
-        }).observe(themeStyle, { attributes: true, attributeFilter: ['style'] });
+                });
+            }).observe(themeStyle, { attributes: true, attributeFilter: ['style'] });
+        } catch (e) {
+            // ignore
+        }
 
         let fullScreenItem = htmlToElement('<button title="全屏" class="readerControls_item full"></button>');
         fullScreenItem.appendChild(fullScreenItemSpan);
