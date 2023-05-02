@@ -1,7 +1,7 @@
 /**
- * 将 html 字符串转换为 Element
+ * 将 HTML 字符串转换为 Element
  *
- * @param htmlStr HTML 用于转换为 element 的 html 字符串
+ * @param htmlStr 用于转换为 element 的 html 字符串
  * @return ChildNode
  */
 function htmlToElement(htmlStr) {
