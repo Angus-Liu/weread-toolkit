@@ -1,19 +1,24 @@
 /**
- * @param {String} HTML 用于转换为 element 的 html 字符串
- * @return {Element}
+ * 将 html 字符串转换为 Element
+ *
+ * @param htmlStr HTML 用于转换为 element 的 html 字符串
+ * @return ChildNode
  */
- function htmlToElement (html) {
-    var template = document.createElement('template');
-    template.innerHTML = html.trim();
+function htmlToElement(htmlStr) {
+    const template = document.createElement('template');
+    template.innerHTML = htmlStr.trim();
     return template.content.firstChild;
 }
 
 let fullScreen = false;
 let readerTopBarMaxWidth, appContentMaxWidth, readerControlsLeft;
 
-function runFullScreen () {
+function runFullScreen() {
+    // 阅读页面顶部工具栏
     let readerTopBar = document.querySelector('div.readerTopBar');
+    // 内容显示区域
     let appContent = document.querySelector('div.app_content');
+    // 左侧控件工具栏
     let readerControls = document.querySelector('div.readerControls');
 
     fullScreen = !fullScreen;
@@ -36,40 +41,20 @@ function runFullScreen () {
         readerControls.style.right = 'unset';
     }
 
-
     // 主动触发 resize 事件，让 app_content 下的 wr_canvasContainer（canvas）进行重绘
-    let resizeEvent = new Event('resize');
-    window.dispatchEvent(resizeEvent);
+    window.dispatchEvent(new Event('resize'));
 }
+
 
 let retryTimes = 3;
 
 // 将按钮添加到控制栏
-function appendFullScreenItem () {
+function appendFullScreenItem() {
     try {
-        let themeStyle = document.querySelector('button.readerControls_item.theme > span');
-        let fullScreenItemSpan = htmlToElement('<span>全屏</span>');
-    
-        try {        
-            fullScreenItemSpan.style.color = themeStyle.style.color;
-            // 监听主题按钮颜色变化，为全屏按钮设置样式
-            new MutationObserver((mutations) => {
-                mutations.forEach((mutation) => {
-                    if (mutation.type == "attributes") {
-                        if (mutation.target.dataset.color !== mutation.target.style.color) {
-                            fullScreenItemSpan.style.color = mutation.target.style.color;
-                        }
-                    }
-                });
-            }).observe(themeStyle, { attributes: true, attributeFilter: ['style'] });
-        } catch (e) {
-            // ignore
-        }
-
-        let fullScreenItem = htmlToElement('<button title="全屏" class="readerControls_item full"></button>');
-        fullScreenItem.appendChild(fullScreenItemSpan);
+        let fullScreenItem = htmlToElement(
+            '<button title="全屏" class="readerControls_item full"><span class="icon"></span></button>'
+        );
         fullScreenItem.addEventListener('click', runFullScreen);
-
         // 将按钮添加到控制栏
         let readerControls = document.querySelector('div.readerControls');
         readerControls.prepend(fullScreenItem);
