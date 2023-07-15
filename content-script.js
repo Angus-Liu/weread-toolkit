@@ -13,7 +13,6 @@ function htmlToElement (htmlStr) {
 let fullScreen = false;
 let readerTopBarMaxWidth, appContentMaxWidth, readerControlsLeft;
 
-
 /**
  * 全屏切换
  */
