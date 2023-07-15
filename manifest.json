@@ -4,7 +4,8 @@
   "version": "1.0",
   "manifest_version": 3,
   "permissions": [
-    "scripting"
+    "scripting",
+    "storage"
   ],
   "host_permissions": [
     "https://weread.qq.com/"
