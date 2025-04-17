@@ -12,7 +12,7 @@ function htmlToElement(htmlStr) {
 
 const ORIGIN_STEP = 0;
 const MAX_STEP = 5;
-const RETRY_DELAY_MS = 200;
+const RETRY_DELAY_MS = 1000;
 const MAX_RETRIES = 3;
 
 /**
